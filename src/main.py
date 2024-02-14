@@ -128,11 +128,21 @@ def seleccion(event):
             for function in functions.botones:
                 function.pack_forget()
             functions.set_calcular_x()
+        case "Liquidity/Exposure Ratio":
+            for widget in widgets.widgets:
+                widget.pack_forget()
+            if len(functions.average_widgets) > 0:
+                for widget_group in functions.average_widgets:
+                    for widget in widget_group:
+                        widget.pack_forget()
+            for function in functions.botones:
+                function.pack_forget()
+            functions.set_calcular_ratio()
 
 # opciones para combobox
 opciones = ["Percentage Difference", "Crypto to USDT", "Add/Substract Percentage",
              "Value to Percentage" , "Calculate ROI (Profit)", "Calculate ROI (Total)", "Calculate Percentage", "Leverage Calculator",
-             "Calculate Sell Price", "Average Price Operator", "X Calculator"]
+             "Calculate Sell Price", "Average Price Operator", "X Calculator", "Liquidity/Exposure Ratio"]
 # Crear un combobox
 combobox = ttk.Combobox(support.frame_dentro_canvas, values=opciones, state='readonly')
 combobox.pack(pady=(0, 0))  # Posiciona el combobox

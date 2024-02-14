@@ -53,15 +53,14 @@ def sumar_porcentaje():
         widgets.label_resultado_operar_porcentaje.config(text="Error: Invalid Entry.")
 
 def calcular_valor_porcentaje():
-    try:
-        valor_origen = float(widgets.entry_valor_original.get())
-        valor_calcular = float(widgets.entry_calcular_porcentaje.get())
+        try:
+            valor_origen = float(widgets.entry_valor_original.get())
+            valor_calcular = float(widgets.entry_calcular_porcentaje.get())
+            nuevo_valor = (valor_calcular * 100) / valor_origen
 
-        nuevo_valor = (valor_calcular * 100) / valor_origen
-
-        widgets.label_resultado_porcentaje.config(text=f"Percentage: {nuevo_valor:.6f}%")
-    except ValueError:
-        widgets.label_resultado_porcentaje.config(text="Error: Invalid Entry.")
+            widgets.label_resultado_porcentaje.config(text=f"Percentage: {nuevo_valor:.6f}%")
+        except ValueError:
+            widgets.label_resultado_porcentaje.config(text="Error: Invalid Entry.")
 
 def calcular_roi():
     try:
@@ -171,7 +170,28 @@ def calcular_average():
                                              f"Current Price: {precio_actual:.6f}\n"
                                              f"Current Value: {valor_actual:.6f}\n"
                                              f"Profit/Loss: {profit:.6f}"))
-    
+
+def calcular_ratio():
+    try:
+        liquidez = float(widgets.entry_liquidez.get())
+        exposicion = float(widgets.entry_exposicion.get())
+        if exposicion > liquidez:
+            porcentaje_exposicion = 100 - ((liquidez * 100) / exposicion)
+            porcentaje_liquidez = 100 - porcentaje_exposicion
+        elif exposicion < liquidez:
+            porcentaje_liquidez = 100 - ((exposicion * 100) / liquidez)
+            porcentaje_exposicion = 100 - porcentaje_liquidez
+        else: 
+            porcentaje_exposicion = 50
+            porcentaje_liquidez = 50
+        
+        ratio = exposicion / liquidez
+
+        widgets.label_ratio_resultado.config(text=(f"Exposure: {porcentaje_exposicion:.6f}%\n"
+                                                    f"Liquidity: {porcentaje_liquidez:.6f}%\n"
+                                                    f"Liquidity/Exposure Ratio: 1:{ratio:.6f}"))
+    except ValueError:
+        widgets.label_ratio_resultado.config(text="Error: Invalid Entry.")        
 
 # permite calcular el rendimiento de una posicion
 def calcular_rendimiento(total_unidades, total_inversion, precio_actual):
@@ -179,7 +199,6 @@ def calcular_rendimiento(total_unidades, total_inversion, precio_actual):
     profit = valor_actual - total_inversion  # Diferencia entre el valor actual de la posicion y la inversión total
     
     return profit, valor_actual
-
 
 def calcular_x():
     try:
@@ -346,6 +365,15 @@ def set_calcular_leverage():
     boton_calcular_leverage.pack()
     widgets.label_resultado_leverage.pack()
 
+def set_calcular_ratio():
+    support.actualizar_canvas()
+    widgets.label_liquidez.pack()
+    widgets.entry_liquidez.pack()
+    widgets.label_exposicion.pack()
+    widgets.entry_exposicion.pack()
+    boton_ratio.pack()
+    widgets.label_ratio_resultado.pack()
+
 #crear boton
 boton_calcular_diferencia = tk.Button(support.frame_dentro_canvas, text="Calculate Difference", command=calcular_diferencia)
 boton_calcular_conversion = tk.Button(support.frame_dentro_canvas, text="Calculate Value", command=calcular_conversion)
@@ -360,10 +388,11 @@ boton_calcular_venta_limit = tk.Button(support.frame_dentro_canvas, text="Calcul
 start_button = tk.Button(support.frame_dentro_canvas, text="Start Calculation", command=start_operation)
 average_boton = tk.Button(support.frame_dentro_canvas, text="Calculate Average Price", command=calcular_average)
 fromto_button = tk.Button(support.frame_dentro_canvas, text="Calculate X", command=calcular_x) 
+boton_ratio = tk.Button(support.frame_dentro_canvas, text="Calculate Ratio", command=calcular_ratio)
 
 average_widgets = [] # lista donde se guardan los widgets de la funcion "average" solamente
 
 botones = [boton_calcular_diferencia, boton_calcular_conversion, 
 boton_restar_porcentaje, boton_sumar_porcentaje, boton_calcular_porcentaje, boton_calcular_roi,
 boton_calcular_porcentaje2, boton_calcular_leverage, boton_calcular_venta_limit, boton_calcular_roi_total,
-start_button, average_boton, fromto_button]
+start_button, average_boton, fromto_button, boton_ratio]

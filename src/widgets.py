@@ -52,6 +52,10 @@ label_from_value = tk.Label(support.frame_dentro_canvas, text="From Value:")
 label_to_value = tk.Label(support.frame_dentro_canvas, text="To Value:")
 label_fromto_result = tk.Label(support.frame_dentro_canvas, text="Total X:")
 
+label_liquidez = tk.Label(support.frame_dentro_canvas, text="Liquidity:")
+label_exposicion = tk.Label(support.frame_dentro_canvas, text="Exposure:")
+label_ratio_resultado = tk.Label(support.frame_dentro_canvas, text="Exposure:\nLiquidity:\nLiquidity/Exposure Ratio:")
+
 # crear entrys
 entry_valor_final = tk.Entry(support.frame_dentro_canvas)
 entry_valor_inicial = tk.Entry(support.frame_dentro_canvas)
@@ -90,6 +94,9 @@ entry_precio_actual = tk.Entry(support.frame_dentro_canvas)
 entry_from_value = tk.Entry(support.frame_dentro_canvas)
 entry_to_value = tk.Entry(support.frame_dentro_canvas)
 
+entry_liquidez = tk.Entry(support.frame_dentro_canvas)
+entry_exposicion = tk.Entry(support.frame_dentro_canvas)
+
 widgets = [
     label_valor_inicial, entry_valor_inicial, label_valor_final, entry_valor_final, 
     label_resultado, label_usdt, entry_value_usdt, label_fee, entry_fee, 
@@ -108,5 +115,6 @@ widgets = [
     label_resultado_venta_limit, entry_inversion_total, entry_profit_total,
     label_inversion_total, label_profit_total, label_resultado_roi_total,
     entry_total_operations, entry_precio_actual, label_precio_actual, label_total_operations, label_resultado_average, label_error_start_operations,
-    label_from_value, label_to_value, label_fromto_result, entry_from_value, entry_to_value
+    label_from_value, label_to_value, label_fromto_result, entry_from_value, entry_to_value,
+    label_liquidez, label_exposicion, label_ratio_resultado, entry_liquidez, entry_exposicion
 ]

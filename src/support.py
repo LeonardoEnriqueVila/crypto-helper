@@ -4,7 +4,7 @@ from tkinter import ttk
 # Crear la ventana principal
 ventana = tk.Tk()
 ventana.iconbitmap('C:\\Users\\leona\\Desktop\\Python\\cripto_app\\btc-icon.ico')
-ventana.title("Crypto Helper v0.1")
+ventana.title("Crypto Helper v0.2")
 ventana.geometry("280x400")
 
 # Crear un Canvas y una Scrollbar
